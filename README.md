@@ -14,7 +14,7 @@ npm install naked-websocket
 
 ## Example
 
-__See *examples* folder.__
+_See examples folder._
 
 Server example
 
