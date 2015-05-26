@@ -27,6 +27,8 @@ var options = {
 };
 
 var server = nws.createServer(options, function(socket) {
+  // can examine: socket.headers
+  
   console.log('client connected');
 
   socket.on('data', function(chunk) {

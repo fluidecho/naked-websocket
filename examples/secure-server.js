@@ -1,4 +1,5 @@
 var nws = require('..');
+var preview = require('preview')('nws-example-secure-server');    // node secure-server.js --preview
 var fs = require('fs');
 
 // use same options as: https://nodejs.org/api/tls.html, you need to generate own key.pem and cert.pem.
@@ -12,7 +13,9 @@ var options = {
 };
 
 var server = nws.createServer(options, function(socket) {
-  // examine: socket.headers.authorization
+
+  preview('socket.headers', socket.headers);    // examine: socket.headers.authorization
+
   if ( !socket.headers.authorization ) {
     socket.goodbye(401);
   } else if ( socket.headers.authorization.password === 'password' ) {
