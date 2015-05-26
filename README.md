@@ -26,10 +26,12 @@ var options = {
 
 var server = nws.createServer(options, function(socket) {
   console.log('client connected');
-  socket.write('hello client via net socket');
+
   socket.on('data', function(chunk) {
     console.log(chunk.toString());
   });
+
+  socket.write('hello client via net socket');
 });
 
 server.listen(8080, function() {
@@ -50,13 +52,14 @@ var options = {
   port: 8080
 };
 
-var client = nws.connect(options, function() {
+var client = nws.connect(options, function(socket) {
   console.log('connected to server!');
-  client.write('world!');
-});
 
-client.on('data', function(chunk) {
-  console.log(chunk.toString());
+  socket.on('data', function(chunk) {
+    console.log(chunk.toString());
+  });
+  
+  socket.write('world!');
 });
 
 ```
@@ -82,9 +85,7 @@ var options = {
 };
 
 var server = nws.createServer(options, function(socket) {
-
   // examine: socket.headers.authorization
-
   if ( !socket.headers.authorization ) {
     socket.goodbye(401);
   } else if ( socket.headers.authorization.password === 'password' ) {
@@ -94,10 +95,12 @@ var server = nws.createServer(options, function(socket) {
   }
 
   console.log('client connected');
-  socket.write('hello client via tls socket');
+  
   socket.on('data', function(chunk) {
     console.log(chunk.toString());
   });
+  
+  socket.write('hello client via tls socket');
 });
 
 server.listen(8443, function() {
@@ -124,13 +127,14 @@ var options = {
   auth: 'username:password'
 };
 
-var client = nws.connect(options, function() {
+var client = nws.connect(options, function(socket) {
   console.log('connected to server!');
-  client.write('world!');
-});
-
-client.on('data', function(chunk) {
-  console.log(chunk.toString());
+  
+  socket.on('data', function(chunk) {
+    console.log(chunk.toString());
+  });
+  
+  socket.write('world!');
 });
 
 ```
