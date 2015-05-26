@@ -158,7 +158,8 @@ Can use same as: [https://nodejs.org/api/net.html](https://nodejs.org/api/net.ht
          codec: undefined,     // content-type (mime) eg: 'ldjson' (application/ldjson), 'amp-message' (application/amp-message) [npm install amp-message].
        charset: 'utf8',        // message charset encoding.
  slowHandshake: false,         // true: if you wish to manage own auth at app level.
-      timedout: 15000          // how long to wait for connection.
+      timedout: 15000,         // how long to wait for connection.
+       noDelay: false          // true = turn nagle batching algorithm off.
 ```
 
 ## License

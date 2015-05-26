@@ -4,16 +4,9 @@
   "version": "0.0.1",
   "main": "index.js",
   "homepage": "https://github.com/fluidecho/naked-websocket",
-  "author": {
-    "name": "Mark W. B. Ashcroft",
-    "email": "mark@fluidecho.com",
-    "url": "http://fluidecho.com"
-  },
+  "author": "Mark W. B. Ashcroft <mark@fluidecho.com> (http://fluidecho.com)",
   "contributors": [
-    {
-      "name": "Mark W. B. Ashcroft",
-      "email": "mark@fluidecho.com"
-    }
+    "Mark W. B. Ashcroft <mark@fluidecho.com>"
   ],
   "dependencies": {
     "preview": "~0.1.1"
@@ -38,5 +31,12 @@
     "socket",
     "websocket",
     "naked"
-  ]
+  ],
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
