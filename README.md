@@ -16,7 +16,7 @@ npm install naked-websocket
 
 _See examples folder._
 
-Server example
+#### Server example
 
 ```js
 var nws = require('naked-websocket');
@@ -42,7 +42,7 @@ server.listen(8080, function() {
 
 ```
 
-Client example
+#### Client example
 
 ```js
 var nws = require('naked-websocket');
@@ -70,7 +70,7 @@ var client = nws.connect(options, function(socket) {
 
 _TIP: I've found using HAProxy in front to do SSL/TLS with node.js behind using plain TCP (as above example) shows better performance._ 
 
-Server example
+#### Server example
 
 ```js
 var nws = require('naked-websocket');
@@ -111,7 +111,7 @@ server.listen(8443, function() {
 
 ```
 
-Client example
+#### Client example
 
 ```js
 var nws = require('naked-websocket');
