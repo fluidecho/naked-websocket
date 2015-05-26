@@ -1,7 +1,7 @@
 {
   "name": "naked-websocket",
   "description": "Connect peers via WebSocket with the raw net or tls sockets.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "homepage": "https://github.com/fluidecho/naked-websocket",
   "author": "Mark W. B. Ashcroft <mark@fluidecho.com> (http://fluidecho.com)",
@@ -37,6 +37,6 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"no tests\" && exit 0"
+    "test": "node test.js"
   }
 }
