@@ -14,6 +14,8 @@ npm install naked-websocket
 
 ## Example
 
+__See *examples* folder.__
+
 Server example
 
 ```js
@@ -47,7 +49,7 @@ var nws = require('naked-websocket');
 
 // use same options as: https://nodejs.org/api/net.html
 var options = {
-  protocol: 'ws'
+  protocol: 'ws',
   hostname: '127.0.0.1',
   port: 8080
 };
@@ -76,7 +78,7 @@ var fs = require('fs');
 
 // use same options as: https://nodejs.org/api/tls.html, you need to generate own key.pem and cert.pem.
 var options = {
-  protocol: 'wss'
+  protocol: 'wss',
   slowHandshake: true,    // so can do own auth.
   key: fs.readFileSync(__dirname + '/keys/key.pem'),
   cert: fs.readFileSync(__dirname + '/keys/cert.pem'),
@@ -117,7 +119,7 @@ var fs = require('fs');
 
 // use same options as: https://nodejs.org/api/tls.html, you need to generate key.pem and cert.pem.
 var options = {
-  protocol: 'wss'
+  protocol: 'wss',
   hostname: '127.0.0.1',
   port: 8443,
   key: fs.readFileSync(__dirname + '/keys/key.pem'),
@@ -139,7 +141,7 @@ var client = nws.connect(options, function(socket) {
 
 ```
 
-## Notes
+## Message framing
 
 Naked WebSocket does not frame messages, it leaves this entirely up to each peer. Peers should deploy their own framing technique, could use [WebSocket Protocol Data Framing](http://tools.ietf.org/html/rfc6455#section-5) or something like [AMP](https://github.com/tj/node-amp).
 
@@ -150,7 +152,7 @@ Can use same as: [https://nodejs.org/api/net.html](https://nodejs.org/api/net.ht
 ```
      maxbuffer: 4000,          // max header size, 4000 = 4 KB.
        version: '0.0.1',       // must be same on all peers.
-      protocol: 'ws',          // must be same on all peers.
+      protocol: 'ws',          // 'wss' = secure (TLS), must be same on all peers.
          codec: undefined,     // content-type (mime) eg: 'ldjson' (application/ldjson), 'amp-message' (application/amp-message) [npm install amp-message].
        charset: 'utf8',        // message charset encoding.
  slowHandshake: false,         // true: if you wish to manage own auth at app level.
