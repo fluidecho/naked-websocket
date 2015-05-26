@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var closed;
 
-nws.createServer({protocol: 'ws'}, function(sser) {
+nws.createServer({protocol: 'ws', noDelay: true}, function(sser) {
   sser.on('data', function(chunk) {
     chunk = chunk.toString();
     console.log(chunk);
@@ -15,7 +15,7 @@ nws.createServer({protocol: 'ws'}, function(sser) {
     sser.write('o');
   }, 50);   
 }).listen(8585, function() { 
-  nws.connect({protocol: 'ws', hostname: '127.0.0.1', port: 8585}, function(sclt) {
+  nws.connect({protocol: 'ws', hostname: '127.0.0.1', port: 8585, noDelay: true}, function(sclt) {
     sclt.on('data', function(chunk) {
         chunk = chunk.toString();
         console.log(chunk);
