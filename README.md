@@ -1,10 +1,10 @@
 # Naked WebSocket [![Build Status](https://api.travis-ci.org/fluidecho/naked-websocket.png)](https://travis-ci.org/fluidecho/naked-websocket)
 
-Connect peers via WebSocket Protocol with the raw __net__ or __tls__ node.js/io.js sockets.
+Connect peers via WebSocket Protocol with the raw __net__ or __tls__ node.js/io.js sockets.  
 
-__Why?__ WebSocket Protocol provides a convenient persistent connection for peers, while the __net__ or __tls__ sockets provide raw communication speed and naked bi-directional messaging.  
+WebSocket Protocol provides a persistent connection for peers, while the __net__ or __tls__ sockets provide raw communication speed and naked bi-directional messaging, this makes it fast!  
 
-_This solution is not for Browser clients, but for common peers using this module._
+_This solution is 100% JavaScript. Not for Browser clients, but for common peers using this module for inter-process communication._
 
 ## Installation
 
@@ -53,7 +53,8 @@ var nws = require('naked-websocket');
 var options = {
   protocol: 'ws',
   hostname: '127.0.0.1',
-  port: 8080
+  port: 8080,
+	path: '/foo/bar/?hello=world'
 };
 
 var client = nws.connect(options, function(socket) {
@@ -145,7 +146,7 @@ var client = nws.connect(options, function(socket) {
 
 ## Message framing
 
-Naked WebSocket does not frame messages, it leaves this entirely up to each peer. Peers should deploy their own framing technique, could use [WebSocket Protocol Data Framing](http://tools.ietf.org/html/rfc6455#section-5) or something like [AMP](https://github.com/tj/node-amp).
+Naked WebSocket does not frame messages, it leaves this entirely up to each peer. Peers should deploy their own framing technique, could use [WebSocket Protocol Data Framing](http://tools.ietf.org/html/rfc6455#section-5) or something like: [AMP](https://github.com/tj/node-amp), [MQTT](https://github.com/mqttjs/mqtt-packet).
 
 ## Options
 
@@ -155,11 +156,36 @@ Can use same as: [https://nodejs.org/api/net.html](https://nodejs.org/api/net.ht
      maxbuffer: 4000,          // max header size, 4000 = 4 KB.
        version: '0.0.1',       // must be same on all peers.
       protocol: 'ws',          // 'wss' = secure (TLS), must be same on all peers.
-         codec: undefined,     // content-type (mime) eg: 'ldjson' (application/ldjson), 'amp-message' (application/amp-message) [npm install amp-message].
-       charset: 'utf8',        // message charset encoding.
  slowHandshake: false,         // true: if you wish to manage own auth at app level.
-      timedout: 15000,         // how long to wait for connection.
+      timedout: 15000,         // how long to wait for connection, 15 seconds.
        noDelay: false          // true = turn nagle batching algorithm off.
+```
+Can set own custom headers.
+
+#### Server example
+
+```
+var server = nws.createServer(options, function(socket) {
+  
+  socket.handshake({headers: {Codec: 'mqtt', 'X-foo': 'bar'}});
+	...
+```
+
+#### Client example
+
+```
+var options = {
+  protocol: 'ws',
+  hostname: '127.0.0.1',
+  port: 8443,
+	headers: {
+		Codec: 'mqtt',
+		'X-Hello': 'World'
+	}	
+};
+
+var client = nws.connect(options, function(socket) {
+	...
 ```
 
 ## License
