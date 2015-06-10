@@ -54,7 +54,7 @@ var options = {
   protocol: 'ws',
   hostname: '127.0.0.1',
   port: 8080,
-	path: '/foo/bar/?hello=world'
+  path: '/foo/bar/?hello=world'
 };
 
 var client = nws.connect(options, function(socket) {
@@ -168,7 +168,7 @@ Can set own custom headers.
 var server = nws.createServer(options, function(socket) {
   
   socket.handshake({headers: {Codec: 'mqtt', 'X-foo': 'bar'}});
-	...
+  ...
 ```
 
 #### Client example
@@ -178,14 +178,14 @@ var options = {
   protocol: 'ws',
   hostname: '127.0.0.1',
   port: 8443,
-	headers: {
-		Codec: 'mqtt',
-		'X-Hello': 'World'
-	}	
+  headers: {
+    Codec: 'mqtt',
+    'X-Hello': 'World'
+  } 
 };
 
 var client = nws.connect(options, function(socket) {
-	...
+  ...
 ```
 
 ## License
