@@ -184,6 +184,7 @@ var client = nws.connect(options, function(socket) {
 });
 
 ```
+_To read the [Streaming Message Protocol Specification](http://smprotocol.github.io/)._
 
 ## Options
 
