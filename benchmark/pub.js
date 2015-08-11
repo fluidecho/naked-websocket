@@ -13,6 +13,7 @@
 
 var preview = require('preview')('nws_pub');
 var argv = require('minimist')(process.argv.slice(2));
+var humanize = require('humanize-number');
 var nws = require('..');
 
 
@@ -33,10 +34,32 @@ if ( options.protocol === 'wss' ) {
   options.requestCert = true
 }
 
+
 var ops = 10000;
-var msgsize = 8935;   // to fit MTU of 9000.
+var msgsize = 200;   // to fit MTU of 9000.
 var buf = new Buffer(Array(msgsize).join('a'));
+var x = 0;
 console.log('sending %d byte messages', buf.length);
+
+process.stdin.resume();		//so the program will not close instantly
+
+function exitHandler(options, err) {
+  if (options.cleanup) console.log('sub closed, exit, x: ' + x);
+  if (err) console.log(err.stack);
+  if (options.exit) process.exit();
+}
+
+//do something when app is closing
+process.on('exit', exitHandler.bind(null,{cleanup:true}));
+
+//catches ctrl+c event
+process.on('SIGINT', exitHandler.bind(null, {exit:true}));
+
+//catches uncaught exceptions
+process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+
+
+
 
 
 var server = nws.createServer(options, function(socket) {
@@ -51,7 +74,7 @@ var server = nws.createServer(options, function(socket) {
   });
 
   setTimeout(function() {
-    console.log('timedout, exit');
+    console.log('timedout, exit. bytes sent: ' + humanize(x / 1000) + ' MBs');
     socket.end();
     socket.destroy();
     process.exit();
@@ -60,10 +83,9 @@ var server = nws.createServer(options, function(socket) {
   function more() {
     if ( !argv.slow ) {
       if ( socket.writable && socket.handshaked ) {
-        socket.write( buf );
-        process.nextTick(function() {
-          setImmediate(more);
-        });
+		    socket.write( buf );
+		    x += buf.length;
+		    setImmediate(more);
       }
     } else {
       setInterval(function(){

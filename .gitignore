@@ -1,6 +1,6 @@
 node_modules
 testing
-test
+dev
 keys
 npm-debug.log
 *.pem

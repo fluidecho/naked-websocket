@@ -1,6 +1,6 @@
 # Naked WebSocket [![Build Status](https://api.travis-ci.org/fluidecho/naked-websocket.png)](https://travis-ci.org/fluidecho/naked-websocket)
 
-Connect peers via WebSocket Protocol with the raw __net__ or __tls__ node.js/io.js sockets.  
+Connect peers via WebSocket Protocol with the raw __net__ or __tls__ Node.js sockets.  
 
 WebSocket Protocol provides a persistent connection for peers, while the __net__ or __tls__ sockets provide raw communication speed and naked bi-directional messaging, this makes it fast!  
 
@@ -146,7 +146,44 @@ var client = nws.connect(options, function(socket) {
 
 ## Message framing
 
-Naked WebSocket does not frame messages, it leaves this entirely up to each peer. Peers should deploy their own framing technique, could use [WebSocket Protocol Data Framing](http://tools.ietf.org/html/rfc6455#section-5) or something like: [AMP](https://github.com/tj/node-amp), [MQTT](https://github.com/mqttjs/mqtt-packet).
+Naked WebSocket does not frame messages, it leaves this entirely up to each peer. Peers should deploy their own framing technique, could use [WebSocket Protocol Data Framing](http://tools.ietf.org/html/rfc6455#section-5) or something like: [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), [MQTT](https://github.com/mqttjs/mqtt-packet).
+
+#### Framing Using Streaming Message Protocol (npm install smp) Example
+
+```js
+var nws = require('naked-websocket');
+var smp = require('smp');
+
+var server = nws.createServer({protocol: 'ws'}, function(socket) {
+
+  var stream = smp.StreamParser;
+  var parser = new stream();
+
+  // can use parser.on( 'frame', 'message', 'information', etc.
+
+  parser.on('message', function(message){
+    console.log('message', message);
+    console.log('payload', message.args[0].toString());
+  });
+
+  socket.pipe(parser);
+  
+}).listen(8888);
+
+
+var options = {
+  protocol: 'ws',
+  hostname: '127.0.0.1',
+  port: 8888
+};
+
+var client = nws.connect(options, function(socket) {
+
+  socket.write(smp.encode([ new Buffer('hello world') ]).toBuffer());
+  
+});
+
+```
 
 ## Options
 

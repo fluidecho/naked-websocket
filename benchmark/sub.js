@@ -42,7 +42,7 @@ if ( argv.transport ) {
 
 var n = 0;
 var ops = 10000;
-var bytes = 8935;   // to fit MTU of 9000.
+var bytes = 200;   // to fit MTU of 9000.
 var prev = 0;
 var start = 0;
 var fin = false;
@@ -58,6 +58,12 @@ var byebye = undefined;
 
 
 var client = nws.connect(options, function(socket) {
+
+socket.on('close', function(chunk) {
+	console.log('client socket closed!');
+	done();
+});
+
 
   console.log('connected to pub');
   socket.on('data', function(chunk) {
@@ -117,4 +123,4 @@ function done(){
 
 
 process.on('SIGINT', done);
-setTimeout(done, ops);
+//setTimeout(done, ops);
