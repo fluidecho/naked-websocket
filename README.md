@@ -64,6 +64,10 @@ var client = nws.connect(options, function(socket) {
     console.log(chunk.toString());
   });
   
+  if ( socket.body ) {    // if server body was trailing connection header, emit.
+    socket.emit('data', socket.body);
+  }
+  
   socket.write('world!');
 });
 
@@ -139,6 +143,10 @@ var client = nws.connect(options, function(socket) {
     console.log(chunk.toString());
   });
   
+  if ( socket.body ) {    // if server body was trailing connection header, emit.
+    socket.emit('data', socket.body);
+  }
+  
   socket.write('world!');
 });
 
@@ -189,7 +197,7 @@ var client = nws.connect(options, function(socket) {
   });
   socket.pipe(parser); 
   
-  if ( socket.body ) {    // if server message was trailing connection, emit so can parse.
+  if ( socket.body ) {    // if server message was trailing connection header, emit so can parse.
     socket.emit('data', socket.body);
   }
   

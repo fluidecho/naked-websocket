@@ -13,6 +13,10 @@ var client = nws.connect(options, function(socket) {
   socket.on('data', function(chunk) {
     console.log(chunk.toString());
   });
-
+  
+  if ( socket.body ) {    // if server body was trailing connection header, emit.
+    socket.emit('data', socket.body);
+  }
+  
   socket.write('world!');
 });
