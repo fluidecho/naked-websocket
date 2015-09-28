@@ -168,6 +168,8 @@ var server = nws.createServer({protocol: 'ws'}, function(socket) {
 
   socket.pipe(parser);
   
+  socket.write(smp.encode([ new Buffer('world') ]).toBuffer());
+  
 }).listen(8888);
 
 
@@ -178,8 +180,20 @@ var options = {
 };
 
 var client = nws.connect(options, function(socket) {
-
-  socket.write(smp.encode([ new Buffer('hello world') ]).toBuffer());
+  
+  var stream = smp.StreamParser;
+  var parser = new stream();
+  parser.on('message', function(message){
+    console.log('message', message);
+    console.log('payload', message.args[0].toString());
+  });
+  socket.pipe(parser); 
+  
+  if ( socket.body ) {    // if server message was trailing connection, emit so can parse.
+    socket.emit('data', socket.body);
+  }
+  
+  socket.write(smp.encode([ new Buffer('hello') ]).toBuffer());
   
 });
 
