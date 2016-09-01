@@ -197,7 +197,7 @@ var server = nws.createServer({protocol: 'ws'}, function(socket) {
 
   var payload = {foo : 'bar', num : 101, 'list-of' : [1, 2, 3], buf: new Buffer('hello')};
   var msg = msgpack.pack(payload);
-	socket.write(msg);
+  socket.write(msg);
   
 }).listen(8888);
 
