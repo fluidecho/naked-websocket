@@ -20,12 +20,12 @@ __Why not just use plain old net or tls?__
 Naked WebSocket gives you a way to connect remote Node.js applications via the WebSocket Protocol, 
 while still using the _net_ or _tls_ sockets, this is the best of both worlds! You get:  
   
-	* Firewall friendly access.
-	* Basic Authentication.
-	* HTTP Headers.
-	* Aggree on a message exchange format EG: [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), etc.
-	* Persistent bidirectional inter-process communication.
-	* Full control over the raw _net_ or _tls_ sockets.
+* Firewall friendly access.
+* Basic Authentication.
+* HTTP Headers.
+* Aggree on a message exchange format EG: [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), etc.
+* Persistent bidirectional inter-process communication.
+* Full control over the raw _net_ or _tls_ sockets.
   
 __...__  
   
