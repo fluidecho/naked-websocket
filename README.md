@@ -8,9 +8,9 @@ Connect your Node.js applications with WebSockets via the _net_ or _tls_ sockets
 __Why not just use socket.io?__
 
 You should use socket.io for __Browser__ applications and Naked WebSocket for __inter-process__ 
-applications. Naked WebSocket is a much faster comunication link over socket.io which uses the 
-_http_ module (slower but Browser compliant), Naked WebSocket use the _net_ or _tls_ modules (faster 
-without Browser compliance).  
+applications. Naked WebSocket is a much faster comunication link than socket.io, because socket.io 
+uses the _http_ module (slower but Browser compliant), Naked WebSocket use the _net_ or _tls_ 
+modules (faster without Browser compliance).  
   
 Naked WebSocket also allows you to use any data framing (message exchange) you wish, for example 
 [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), none, or any other.  
@@ -20,12 +20,12 @@ __Why not just use plain old net or tls?__
 Naked WebSocket gives you a way to connect remote Node.js applications via the WebSocket Protocol, 
 while still using the _net_ or _tls_ sockets, this is the best of both worlds! You get:  
   
-	- Firewall friendly access.
-	- Basic Authentication.
-	- HTTP Headers.
-	- Aggree on a message exchange format EG: [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), etc.
-	- Persistent bidirectional inter-process communication.
-	- Full control over the raw _net_ or _tls_ sockets.
+	* Firewall friendly access.
+	* Basic Authentication.
+	* HTTP Headers.
+	* Aggree on a message exchange format EG: [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), etc.
+	* Persistent bidirectional inter-process communication.
+	* Full control over the raw _net_ or _tls_ sockets.
   
 __...__  
   
@@ -180,13 +180,13 @@ var client = nws.connect(options, function(socket) {
 
 ## Message framing
 
-Naked WebSocket does not frame messages, it leaves this entirely up to each peer. Peers should deploy their own framing technique, could use [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp).
+Naked WebSocket does not frame messages, it leaves this entirely up to each node. Nodes should deploy their own framing technique, could use [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), or your own.
 
-#### Messaging Using MsgPack (npm install msgpack) Example
+#### Messaging using MsgPack (npm install msgpack) Example
 
 ```js
 const nws = require('naked-websocket');
-const msgpack = require('msgpack');
+const msgpack = require('msgpack');    // npm install msgpack
 
 var server = nws.createServer({protocol: 'ws'}, function(socket) {
 
@@ -226,7 +226,6 @@ var client = nws.connect(options, function(socket) {
 });
 
 ```
-_To read the [Streaming Message Protocol Specification](http://smprotocol.github.io/)._
 
 ## Options
 
@@ -247,7 +246,7 @@ Can set own custom headers.
 ```
 var server = nws.createServer(options, function(socket) {
   
-  socket.handshake({headers: {Codec: 'msgpack', 'X-foo': 'bar'}});
+  socket.handshake({headers: {Framing: 'msgpack', 'X-foo': 'bar'}});
   ...
 ```
 
@@ -259,7 +258,7 @@ var options = {
   hostname: '127.0.0.1',
   port: 8443,
   headers: {
-    Codec: 'msgpack',
+    Framing: 'msgpack',
     'X-Hello': 'World'
   } 
 };
