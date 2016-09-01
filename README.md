@@ -9,7 +9,7 @@ __Why not just use socket.io?__
 
 You should use socket.io for __Browser__ applications and Naked WebSocket for __inter-process__ 
 applications. Naked WebSocket is a much faster comunication link than socket.io, because socket.io 
-uses the _http_ module (slower but Browser compliant), Naked WebSocket use the _net_ or _tls_ 
+uses the _http_ module, slower but Browser compliant, Naked WebSocket uses the _net_ or _tls_ 
 modules (faster without Browser compliance).  
   
 Naked WebSocket also allows you to use any data framing (message exchange) you wish, for example 
