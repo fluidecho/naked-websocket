@@ -1,5 +1,4 @@
-var nws = require('..');
-var preview = require('preview')('nws-example-server');    // node server.js --preview
+const nws = require('..');
 
 // use same options as: https://nodejs.org/api/net.html
 var options = {
@@ -7,9 +6,7 @@ var options = {
 };
 
 var server = nws.createServer(options, function(socket) {
-  console.log('client connected');
-
-  preview('socket.headers', socket.headers);
+  console.log('client connected, socket.headers,', socket.headers);
 
   socket.on('data', function(chunk) {
     console.log(chunk.toString());

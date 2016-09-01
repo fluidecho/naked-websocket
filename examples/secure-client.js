@@ -1,5 +1,5 @@
-var nws = require('..');
-var fs = require('fs');
+const nws = require('..');
+const fs = require('fs');
 
 // use same options as: https://nodejs.org/api/tls.html, you need to generate key.pem and cert.pem.
 var options = {
