@@ -1,13 +1,13 @@
 # Naked WebSocket
 
-[![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url]
 [![node version][node-image]][node-url]
 
-[npm-image]: https://img.shields.io/npm/v/naked-websocket.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/naked-websocket
 [travis-image]: https://api.travis-ci.org/fluidecho/naked-websocket.png
 [travis-url]: https://travis-ci.org/fluidecho/naked-websocket
+[npm-image]: https://img.shields.io/npm/v/naked-websocket.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/naked-websocket
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.12-blue.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 
