@@ -11,7 +11,7 @@
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.12-blue.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 
-WebSockets for node to node data exchange.  
+Fastest WebSockets for node to node data exchange.  
   
 Connect your back-end node.js applications with WebSockets and exchange data with any format you 
 wish, [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), 
@@ -20,7 +20,7 @@ none, etc.
 __Why not just use socket.io or ws modules?__
 
 You should use socket.io or ws for __Browser__ applications and Naked WebSocket for __back-end__ 
-applications. Naked WebSocket is a much faster communication link because it uses the raw _net_ or 
+applications. Naked WebSocket is a __much faster__ communication link because it uses the raw _net_ or 
 _tls_ sockets, without Browser regard.  
   
 Naked WebSocket allows you to use any data framing (message exchange) you wish, for example 
