@@ -11,37 +11,37 @@
 [node-image]: https://img.shields.io/badge/node.js-%3E=_0.12-blue.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 
-WebSockets for Node.js inter-process communications.  
+WebSockets for node to node data exchange.  
   
-Connect your Node.js applications with WebSockets via the _net_ or _tls_ sockets, exchange data with 
- [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), or any other format you wish.  
+Connect your back-end node.js applications with WebSockets and exchange data with any format you 
+wish, [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), 
+none, etc.  
   
-__Why not just use socket.io?__
+__Why not just use socket.io or ws modules?__
 
-You should use socket.io for __Browser__ applications and Naked WebSocket for __inter-process__ 
-applications. Naked WebSocket is a much faster comunication link than socket.io, because socket.io 
-uses the _http_ module, slower but Browser compliant, Naked WebSocket uses the _net_ or _tls_ 
-modules (faster without Browser compliance).  
+You should use socket.io or ws for __Browser__ applications and Naked WebSocket for __back-end__ 
+applications. Naked WebSocket is a much faster communication link because it uses the raw _net_ or 
+_tls_ sockets, without Browser regard.  
   
-Naked WebSocket also allows you to use any data framing (message exchange) you wish, for example 
+Naked WebSocket allows you to use any data framing (message exchange) you wish, for example 
 [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), none, or any other.  
   
-__Why not just use plain old net or tls?__
+__Why not just use plain old net or tls without WebSockets?__
 
-Naked WebSocket gives you a way to connect remote Node.js applications via the WebSocket Protocol, 
-while still using the _net_ or _tls_ sockets, this is the best of both worlds! You get:  
+Because Naked WebSocket gives you a way to connect remote node.js applications via the WebSocket 
+Protocol, while still using the _net_ or _tls_ sockets, this is the best of both worlds! You get:  
   
 * Firewall friendly access.
 * Basic Authentication.
 * HTTP Headers.
 * Aggree on a message exchange format EG: [JSON](https://www.npmjs.com/package/ndjson), [MsgPack](https://www.npmjs.com/package/msgpack), [SMP](https://github.com/smprotocol/smp-node), [AMP](https://github.com/tj/node-amp), etc.
-* Persistent bidirectional inter-process communication.
+* Persistent bidirectional remote node communication.
 * Full control over the raw _net_ or _tls_ sockets.
   
 __...__  
   
-_Complies with WebSocket Protocol version 13 as Sub Protocol: 'nws', (you choose own data framing). 
-This solution is not for Browser clients, but for common nodes using this module for inter-process 
+_Complies with WebSocket Protocol version 13 as Sub Protocol: 'nws/' + options.version, (you choose own data framing). 
+This solution is not for Browser clients, but for common nodes using this module for data exchange 
 communication._
 
 
