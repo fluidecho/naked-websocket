@@ -4,3 +4,4 @@ dev
 keys
 npm-debug.log
 *.pem
+*~
